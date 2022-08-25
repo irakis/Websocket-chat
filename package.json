@@ -1,0 +1,13 @@
+{
+  "name": "Chat",
+  "version": "1.0.0",
+  "description": "simle chat comunicator",
+  "main": "index.js",
+  "author": "Ireneusz Wyszomirski",
+  "license": "MIT",
+  "scripts": {
+    "build": "babel src -d lib",
+    "test": "jest",
+    "start": "app.js"
+  }
+}
