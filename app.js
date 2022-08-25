@@ -1,46 +1,51 @@
-import { select } from "./settings";
 
-const userName = 'user1';
+let userName = '';
 const thisApp = this;
 
-thisApp.dom ={};
-thisApp.dom.loginForm = document.querySelector(select.loginForm);
-thisApp.dom.messagesSection = document.querySelector(select.messagesSection);
-thisApp.dom.messagesList = document.querySelector(select.messagesList);
-thisApp.dom.addMessageForm = document.querySelector(select.addMessageForm);
-thisApp.dom.userNameInput = document.querySelector(select.userNameInput);
-thisApp.dom.messageContentInput = document.querySelector(select.messageContentInput);
+//select
 
-const loginFormHandler = (e) => { 
-    
-    thisApp.dom.loginForm.addEventListener( 'submit', function login (e) {
-        e.preventDefault();
-        const userId = thisApp.dom.userNameInput.value;
-        if(userId) {
-            const userName = userId;
-            thisApp.dom.loginForm.classList.remove('show');
-            thisApp.dom.messagesSection.classList.add('show');
-        } else {
-            return alert('The field is empty.')
-        }
-        console.log('prevent and dom  works?', userId)
-    })
+const loginForm = document.querySelector('#welcome-form');
+const messagesSection = document.querySelector('#messages-section');
+const messagesList = document.querySelector('#messages-list');
+const addMessageForm = document.querySelector('#add-messages-form');
+const userNameInput = document.querySelector('#username');
+const messageContentInput = document.querySelector('#message-content');
 
+//functions
+
+const login = (e) => {
+    e.preventDefault();
+    const userId = userNameInput.value;
+    if(userId) {
+        const userName = userId;
+        loginForm.classList.remove('show');
+        messagesSection.classList.add('show');
+        console.log(userName);
+    } else {
+        return alert('The field is empty.')
+    }
 };
 
-const addMessageFormHandler = () => {
+const sendMessage = (e) => {
     e.preventDefault();
-    const isMessage = thisApp.dom.addMessageForm.value;
-    thisApp.dom.addMessageForm.addEventListener('submit', function sendMessage (e) {
-        if(isMessage) {
-            addMessage(userName, thisApp.dom.messageContentInput.value);
-            thisApp.dom.messageContentInput.value = '';
-        } else {
-            return alert ('The message file is empty')
-        }
-    })
-}
+    if(isMessage) {
+        addMessage(userName, messageContentInput.value);
+        messageContentInput.value = '';
+    } else {
+        return alert ('The message file is empty')
+    }
+};
 
+const addMessage = (author, content ) => {
+    const message = document.createElement('li');
+    message.classList.add('message message--received');
+    if(author === userName) message.classList.add('message--self');
+    message.innerHTML += 
+        `<h3 class="message__author">${ author === userName ? 'You' : author }</h3>;
+        <div class="message__content"> ${content} </div>`;
 
-
-//export default loginFormHandler;
+    messagesList.appendChild(message)
+};
+console.log(loginForm);
+loginForm.addEventListener('submit',  (e) => { login(e) });
+addMessageForm.addEventListener('submit', (e) => { sendMessage(e) });
