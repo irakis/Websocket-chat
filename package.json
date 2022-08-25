@@ -1,13 +1,16 @@
 {
-  "name": "Chat",
+  "name": "chat",
   "version": "1.0.0",
-  "description": "simle chat comunicator",
   "main": "index.js",
-  "author": "Ireneusz Wyszomirski",
+  "repository": "https://github.com/irakis/Websocket-chat.git",
+  "author": "Ireneusz Wyszomirski <ireneuszwyszomirski44@gmail.com>",
   "license": "MIT",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "4.17.1",
+    "nodemon": "^2.0.19"
+  },
   "scripts": {
-    "build": "babel src -d lib",
-    "test": "jest",
-    "start": "app.js"
+    "start": "nodemon server.js"
   }
 }

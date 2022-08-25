@@ -28,8 +28,9 @@ const login = (e) => {
 
 const sendMessage = (e) => {
     e.preventDefault();
+    const isMessage = messageContentInput.value;
     if(isMessage) {
-        addMessage(userName, messageContentInput.value);
+        addMessage(userName, isMessage);
         messageContentInput.value = '';
     } else {
         return alert ('The message file is empty')
@@ -38,7 +39,8 @@ const sendMessage = (e) => {
 
 const addMessage = (author, content ) => {
     const message = document.createElement('li');
-    message.classList.add('message message--received');
+    message.classList.add('message');
+    message.classList.add('message--received');
     if(author === userName) message.classList.add('message--self');
     message.innerHTML += 
         `<h3 class="message__author">${ author === userName ? 'You' : author }</h3>;
