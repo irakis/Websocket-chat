@@ -22,10 +22,10 @@ let userName = '';
 const login = (e) => {
     e.preventDefault();
     userName = userNameInput.value;
-    console.log('userName w login ??', userName)
     if (userName) {
         loginForm.classList.remove('show');
         messagesSection.classList.add('show');
+        socket.emit('join', userName);
     } else {
         return alert('The field is empty.')
     }
@@ -34,11 +34,8 @@ const login = (e) => {
 const sendMessage = (e) => {
     e.preventDefault();
     let isMessage = messageContentInput.value;
-    console.log('userName jest1?:', userName);
 
-    console.log('isMessage', isMessage)
     if (isMessage.length) {
-        console.log('userName jest2?:', userName);
         addMessage(userName, isMessage);
         socket.emit('message', { author: userName, content: messageContentInput.value })
         messageContentInput.value = '';
@@ -53,8 +50,6 @@ const addMessage = (author, content) => {
     message.classList.add('message--received');
     if (author === userName) {
         message.classList.add('message--self')
-        console.log('author w if:', author);
-        console.log('content w if:', content);
     }
     message.innerHTML +=
         `<h3 class="message__author">${author === userName ? 'You' : author}</h3>

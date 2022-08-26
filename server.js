@@ -9,23 +9,34 @@ const server = app.listen(8000, () => {
 
 //socket
 const io = socket(server);
-io.on('connection', (socket) => {
-  console.log('New client! Its id – ' + socket.id);
 
+const messeges = [];
+let users = [];
+
+io.on('connection', (socket) => {
+
+  socket.on('join', (userName) => {
+    users.push({ name: userName, id: socket.id });
+  });
+  
   socket.on('message', (message) => { 
     messeges.push(message);
     socket.broadcast.emit( 'message', message );
-    socket.on('disconnect', () => { console.log('Oh, socket ' + socket.id + ' has left') });
-    console.log('I\'ve added a listener on message event \n');
-  })
-});
+  });
 
+  socket.on('disconnect', () => {
+    const newUsers = users.filter(user => user.id != socket.id)
+    users = newUsers
+  });
+
+});
+    
 
 app.set('html', __dirname + '/client');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
-const messeges = [];
+
 
 app.use(express.static(path.join(__dirname, 'client')));
 
