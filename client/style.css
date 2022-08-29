@@ -74,6 +74,11 @@ p {
   align-items: flex-start;
 }
 
+.boot {
+  color:rgb(54, 53, 53);
+  font-style: italic;
+}
+
 .message--self {
   align-items: flex-end;
 }

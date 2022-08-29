@@ -5,6 +5,9 @@ const socket = io();
 //sockets
 
 socket.on('message', ({ author, content }) => addMessage(author, content));
+socket.on('newUser', ({ author, content }) => addMessage( author, content));
+socket.on('exitUser', ({ author, content }) => addMessage( author, content));
+
 
 //select
 
@@ -50,6 +53,8 @@ const addMessage = (author, content) => {
     message.classList.add('message--received');
     if (author === userName) {
         message.classList.add('message--self')
+    } else if (author === 'Chat-Boot') {
+        message.classList.add('boot')
     }
     message.innerHTML +=
         `<h3 class="message__author">${author === userName ? 'You' : author}</h3>
