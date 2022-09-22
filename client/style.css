@@ -32,7 +32,7 @@ p {
 }
 
 .btn:hover {
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
 .text-input {
@@ -75,7 +75,7 @@ p {
 }
 
 .boot {
-  color:rgb(54, 53, 53);
+  color: rgb(54, 53, 53);
   font-style: italic;
 }
 
@@ -84,8 +84,8 @@ p {
 }
 
 .message--received {
-    animation: fadeIn;
-    animation-duration: 3s;
+  animation: fadeIn;
+  animation-duration: 3s;
 }
 
 .message__author {

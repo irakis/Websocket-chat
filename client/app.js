@@ -1,13 +1,10 @@
-
-
 const socket = io();
 
 //sockets
 
 socket.on('message', ({ author, content }) => addMessage(author, content));
-socket.on('newUser', ({ author, content }) => addMessage( author, content));
-socket.on('exitUser', ({ author, content }) => addMessage( author, content));
-
+socket.on('newUser', ({ author, content }) => addMessage(author, content));
+socket.on('exitUser', ({ author, content }) => addMessage(author, content));
 
 //select
 
